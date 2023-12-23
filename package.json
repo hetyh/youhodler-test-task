@@ -1,0 +1,26 @@
+{
+  "name": "youhodler-test-task",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false --env-file=.env ./src/app.ts | pino-pretty",
+    "build": "tsc",
+    "start": "node ./dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/sensible": "^5.5.0",
+    "croner": "^8.0.0",
+    "fastify": "^4.25.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "pino-pretty": "^10.3.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
