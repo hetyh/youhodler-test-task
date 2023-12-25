@@ -5,7 +5,7 @@ WORKDIR /home/node/app
 COPY package*.json ./
 USER node
 
-RUN npm install
+RUN npm install --omit dev
 COPY --chown=node:node dist/ .
 
 CMD [ "node", "app.js"] 
