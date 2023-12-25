@@ -20,7 +20,7 @@ const opts: RouteShorthandOptions = {
   schema: tickerSchema
 }
 
-server.get('/btc-price', opts, async (_request, reply) => {
+server.get('/price', opts, async (_request, reply) => {
   const tickerData = tickerMap.get(process.env.TICKER_SYMBOL as string)
 
   if (tickerData == null) {
@@ -31,10 +31,15 @@ server.get('/btc-price', opts, async (_request, reply) => {
   return [{ symbol: process.env.TICKER_SYMBOL, ...tickerData }]
 })
 
-try {
-  await server.listen({ port: Number(process.env.HTTP_PORT) })
-} catch (error) {
-  server.log.error(error)
+server.listen({ 
+  host: '0.0.0.0', 
+  port: Number(process.env.HTTP_PORT) 
+}).catch(err => {
+  server.log.error(err);
   process.exit(1)
-}
+})
 
+process.on('SIGTERM', async () => {
+  await server.close()
+  process.exit(0)
+})
